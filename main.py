@@ -1,4 +1,10 @@
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+slack_token = os.environ['SLACK_TOKEN']
+notion_token = os.environ['NOTION_TOKEN']
 
 
 def get_messages():
@@ -6,7 +12,7 @@ def get_messages():
     # Configure Slack API
     slack_url = "https://slack.com/api/conversations.history"
     slack_headers = {
-        "Authorization": "Bearer xoxb-2717052183575-2751214382097-cqreNP9CwsSBiEIcc7Ya0KcV",
+        "Authorization": f"{slack_token}",
     }
     slack_payload = {
         "channel": "C02MHEN44LE"
@@ -26,7 +32,7 @@ def insert_table(insert_date, insert_name, insert_task):
         "Accept": "application/json",
         "Notion-Version": "2021-08-16",
         "Content-Type": "application/json",
-        "Authorization": "Bearer secret_VybpYaA258TJKIITxsknuMkS6r6Wc5IvtNldhetD1JA"
+        "Authorization": f"{notion_token}"
     }
     notion_payload = {
         "parent": {
